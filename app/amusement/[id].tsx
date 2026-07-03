@@ -3,13 +3,14 @@ import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from 'react-nat
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Card } from '@/components/ui';
-import { getAgency, getAmusement } from '@/data/mock';
+import { useData } from '@/context/DataContext';
 import { t } from '@/i18n/fa';
 import { colors, faNum, faPrice, radius, spacing } from '@/theme';
 
 const { width } = Dimensions.get('window');
 
 export default function AmusementDetail() {
+  const { getAmusement, getAgency } = useData();
   const { id } = useLocalSearchParams<{ id: string }>();
   const item = getAmusement(id!);
   const agency = item ? getAgency(item.agencyId) : undefined;

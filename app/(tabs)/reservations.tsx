@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Card } from '@/components/ui';
 import { Reservation, ReservationStatus, useApp } from '@/context/AppContext';
-import { getAmusement } from '@/data/mock';
+import { useData } from '@/context/DataContext';
 import { t } from '@/i18n/fa';
 import { colors, faNum, faPrice, radius, spacing } from '@/theme';
 
@@ -16,6 +16,7 @@ const statusMeta: Record<ReservationStatus, { label: string; color: string }> = 
 };
 
 function ReservationCard({ item }: { item: Reservation }) {
+  const { getAmusement } = useData();
   const amusement = getAmusement(item.amusementId);
   const slot = amusement?.slots.find((s) => s.id === item.slotId);
   const status = statusMeta[item.status];

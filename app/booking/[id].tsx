@@ -13,7 +13,8 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Card, Input } from '@/components/ui';
 import { Participant, useApp } from '@/context/AppContext';
-import { getAmusement, TAX_RATE } from '@/data/mock';
+import { useData } from '@/context/DataContext';
+import { TAX_RATE } from '@/data/types';
 import { t } from '@/i18n/fa';
 import { colors, faNum, faPrice, radius, spacing } from '@/theme';
 
@@ -57,6 +58,7 @@ function Stepper({
 }
 
 export default function Booking() {
+  const { getAmusement } = useData();
   const { id } = useLocalSearchParams<{ id: string }>();
   const item = getAmusement(id!);
   const { setDraft } = useApp();

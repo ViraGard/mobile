@@ -4,11 +4,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import AmusementCard from '@/components/AmusementCard';
-import { amusements, categories } from '@/data/mock';
+import { useData } from '@/context/DataContext';
 import { t } from '@/i18n/fa';
 import { colors, radius, spacing } from '@/theme';
 
 export default function Home() {
+  const { amusements, categories } = useData();
   const featured = amusements.filter((a) => a.featured);
 
   return (

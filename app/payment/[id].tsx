@@ -4,11 +4,12 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Card } from '@/components/ui';
 import { Reservation, useApp } from '@/context/AppContext';
-import { getAmusement } from '@/data/mock';
+import { useData } from '@/context/DataContext';
 import { t } from '@/i18n/fa';
 import { colors, faPrice, spacing } from '@/theme';
 
 export default function Payment() {
+  const { getAmusement } = useData();
   const { id } = useLocalSearchParams<{ id: string }>();
   const item = getAmusement(id!);
   const { draft, confirmDraft } = useApp();

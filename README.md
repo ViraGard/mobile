@@ -1,6 +1,16 @@
 # ViraGard Mobile (Mock Version)
 
-Customer app for the ViraGard entertainment reservation platform. React Native + Expo (SDK 53) + expo-router + TypeScript. All data is mocked in `src/data/mock.ts` — no backend needed yet.
+Customer app for the ViraGard entertainment reservation platform. React Native + Expo (SDK 53) + expo-router + TypeScript. Data comes from **Supabase** (catalog + reservations); if Supabase isn't configured, the app automatically falls back to local mock data in `src/data/mock.ts`.
+
+## Supabase setup (one time)
+
+1. Create a free project at [supabase.com](https://supabase.com)
+2. Open **SQL Editor** → paste and run `supabase/setup.sql` (creates tables, RLS policies, and seeds all mock data — safe to re-run)
+3. Copy `.env.example` to `.env` and fill from **Project Settings → API**:
+   - `EXPO_PUBLIC_SUPABASE_URL`
+   - `EXPO_PUBLIC_SUPABASE_ANON_KEY`
+
+> RLS policies in `setup.sql` are wide-open for the mock phase (anon read catalog, anon insert reservations). Tighten before anything real.
 
 ## Run
 
@@ -38,11 +48,15 @@ app/            expo-router screens
   booking/      reservation form
   payment/      mock gateway
 src/
-  data/mock.ts       mock categories, agencies, amusements  ← replace with Laravel API later
-  context/           auth + reservation state
+  lib/supabase.ts    Supabase client (env-driven)
+  data/types.ts      shared domain types + TAX_RATE
+  data/api.ts        Supabase queries → app types (same shape the Laravel API will use)
+  data/mock.ts       local fallback dataset (source of truth: supabase/setup.sql)
+  context/           DataContext (catalog) + AppContext (auth, reservations)
   i18n/fa.ts         Farsi strings (en/ar to be added)
   components/        shared UI
   theme.ts           colors, spacing, fa number formatting
+supabase/setup.sql   schema + RLS + seed data
 ```
 
 ## Next steps

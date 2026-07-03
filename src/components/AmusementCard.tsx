@@ -2,11 +2,13 @@ import React from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { Amusement, getAgency, getCategory } from '@/data/mock';
+import { useData } from '@/context/DataContext';
+import { Amusement } from '@/data/types';
 import { t } from '@/i18n/fa';
 import { colors, faNum, faPrice, radius, spacing } from '@/theme';
 
 export default function AmusementCard({ item }: { item: Amusement }) {
+  const { getAgency, getCategory } = useData();
   const agency = getAgency(item.agencyId);
   const category = getCategory(item.categoryId);
 

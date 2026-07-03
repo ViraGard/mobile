@@ -5,11 +5,12 @@ import { useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import AmusementCard from '@/components/AmusementCard';
 import { Chip, Input } from '@/components/ui';
-import { amusements, categories, getAgency } from '@/data/mock';
+import { useData } from '@/context/DataContext';
 import { t } from '@/i18n/fa';
 import { colors, spacing } from '@/theme';
 
 export default function Search() {
+  const { amusements, categories, getAgency } = useData();
   const params = useLocalSearchParams<{ category?: string }>();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export default function Search() {
       const haystack = `${a.title} ${a.city} ${a.location} ${agency?.name ?? ''}`;
       return haystack.includes(q);
     });
-  }, [query, category]);
+  }, [query, category, amusements, getAgency]);
 
   return (
     <SafeAreaView style={styles.safe} edges={['top']}>
