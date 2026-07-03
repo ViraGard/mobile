@@ -59,6 +59,29 @@ src/
 supabase/setup.sql   schema + RLS + seed data
 ```
 
+## Deploy web version to Vercel
+
+The same codebase runs in the browser via `react-native-web`. Two ways:
+
+**CLI (fastest):**
+
+```bash
+cd mobile
+npm install
+npm install -g vercel
+vercel          # first run: login + link project
+vercel --prod
+```
+
+**Git integration:** push the repo to GitHub → vercel.com → Add New Project → set **Root Directory** to `mobile`. Build command and output dir are read from `vercel.json` automatically.
+
+Either way, add the env vars in Vercel → Project → Settings → Environment Variables:
+
+- `EXPO_PUBLIC_SUPABASE_URL`
+- `EXPO_PUBLIC_SUPABASE_ANON_KEY`
+
+Test the web build locally first with `npx expo start --web` or `npx expo export --platform web && npx serve dist`.
+
 ## Next steps
 
 - English/Arabic i18n + full RTL/LTR switching

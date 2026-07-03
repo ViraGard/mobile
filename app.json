@@ -18,6 +18,10 @@
       "package": "com.viragard.app",
       "edgeToEdgeEnabled": true
     },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
     "plugins": ["expo-router"],
     "extra": {
       "supportsRTL": true
