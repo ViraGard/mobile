@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "ViraGard",
+    "slug": "viragard",
+    "version": "0.1.0",
+    "scheme": "viragard",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#0E7C66"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.viragard.app"
+    },
+    "android": {
+      "package": "com.viragard.app",
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": ["expo-router"],
+    "extra": {
+      "supportsRTL": true
+    }
+  }
+}
